@@ -41,11 +41,25 @@ contract EncodingDataInSolidity{
         (bool success, ) = _contract.call(data);
         require(success, "Contract call failed.");
     }
+    /** 
+    . An encoded function is a function that has been transformed into (EVM’s) bytecode.
 
-    // 3 ways of encoding data
-    //             a. encodeWithSignature()
-    //             b. encodeWithSelector()
-    //             c. encodeCall()
+    . This encoded data is used to create payload data that can be sent to
+      function calls for the external contract calls. These are also used to
+      generate unique hashes of different values.
+
+    . For example let say, you have a secondary contract which has a function "Fun-A" and from your primary contract
+      you need to call that function multiple times depending on situation, instead of everytime writing
+      whole code again and again, we can simply encode that function signature and store it on a constant
+      state variable, and use it in external contract call further.
+
+    . There is no perticular rule, that we have follow this way. But when project big, and there are so many external
+      contract calls, at that time this type of technique makes whole code base looks more cleaner and professional
+
+     3 ways of encoding data
+                 a. encodeWithSignature()
+                 b. encodeWithSelector()
+                 c. encodeCall()
     
 
      /**
